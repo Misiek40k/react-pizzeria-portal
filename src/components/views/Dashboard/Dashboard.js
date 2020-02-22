@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './Kitchen.module.scss';
+import styles from './Dashboard.module.scss';
 
-const Kitchen = props => {
+const Dashboard = props => {
   return (
     <div className={styles.component}>
       <h2>Kitchen view</h2>
@@ -11,8 +11,8 @@ const Kitchen = props => {
   );
 };
 
-Kitchen.propTypes = {
+Dashboard.propTypes = {
 
 };
 
-export default Kitchen;
+export default Dashboard;
