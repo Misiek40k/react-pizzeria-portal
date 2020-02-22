@@ -2,12 +2,12 @@ import React from 'react';
 
 import styles from './Waiter.module.scss';
 
-const Waiter = () => {
+const OrderItem = () => {
   return (
     <div className={styles.component}>
-      <h2>Waiter view</h2>
+      <h2>Order Item subview</h2>
     </div>
   );
 };
 
-export default Waiter;
+export default OrderItem;

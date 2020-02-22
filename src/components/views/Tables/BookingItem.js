@@ -2,16 +2,12 @@ import React from 'react';
 
 import styles from './Tables.module.scss';
 
-const Tables = () => {
+const BookingItem = () => {
   return (
     <div className={styles.component}>
-      <h2>Tables view</h2>
+      <h2>Booking Item subview</h2>
     </div>
   );
 };
 
-Tables.propTypes = {
-
-};
-
-export default Tables;
+export default BookingItem;

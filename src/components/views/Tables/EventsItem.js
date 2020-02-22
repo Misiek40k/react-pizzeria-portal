@@ -2,16 +2,12 @@ import React from 'react';
 
 import styles from './Tables.module.scss';
 
-const Tables = () => {
+const EventsID = () => {
   return (
     <div className={styles.component}>
-      <h2>Tables view</h2>
+      <h2>EventsItem subview</h2>
     </div>
   );
 };
 
-Tables.propTypes = {
-
-};
-
-export default Tables;
+export default EventsID;

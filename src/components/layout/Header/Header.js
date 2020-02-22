@@ -1,20 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import PageNav from '../PageNav/PageNav';
 
 import styles from './Header.module.scss';
 
-const Header = props => {
+const Header = () => {
   return (
     <header className={styles.component}>
       <PageNav />
     </header>
   );
-};
-
-Header.propTypes = {
-
 };
 
 export default Header;
