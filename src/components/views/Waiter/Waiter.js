@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './Login.module.scss';
+import styles from './Waiter.module.scss';
 
 const Waiter = props => {
   return (

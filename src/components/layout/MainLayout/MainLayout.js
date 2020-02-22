@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Header from '../Header/Header';
+
 const MainLayout = props => {
   return (
     <div>
-      {props.children}
+      <Header />
+      <main>
+        {props.children}
+      </main>
     </div>
   );
 };

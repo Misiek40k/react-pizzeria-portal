@@ -6,7 +6,7 @@ import styles from './Dashboard.module.scss';
 const Dashboard = props => {
   return (
     <div className={styles.component}>
-      <h2>Kitchen view</h2>
+      <h2>Dashboard view</h2>
     </div>
   );
 };
