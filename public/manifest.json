@@ -1,0 +1,8 @@
+
+{
+  "name": "Pizzeria portal",
+  "short_name": "Pizzeria",
+  "display": "browser",
+  "scope": "/",
+  "start_url": "/"
+}

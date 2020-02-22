@@ -1,62 +1,54 @@
 # Dashboard
-    - Collapse załącza się na wszystkich elementach na raz - mają wspólny state - TODO!!!
-    - '/'
-      - statystyki dzisiejszych zamówień (zdalne, lokalne)
-      - lista rezerwacji i eventów zaplanowanych na dzisiaj
 
-# Logowanie
+- `/`
+  - daily statistics of orders (eat-in or takeaway)
+  - today list of bookings and events
 
-  -'/login'
-    - pola na login i hasło
-    - guzik logowania (link do dashboardu)
+# Log in
 
-# Widok dostępności stolików
+- `/login`
+  - login and password buttons
+  - submit button (link to dashboard)
 
-  - '/tables'
-    - wybór daty i godziny
-    - tabela z listą rezerwacji oraz wydarzeń
-      - kolumna = 1 stolik
-      - wiersz = blok 30min.
-      - przypomina widok tygodnia w kalendarzu Google, gdzie w kolumnach zamiast dni są stoliki
-      - po kliknięciu rezerwacji lub eventu -> strona szczegółów
+# Tables Availability
 
-  - '/tables/booking/:id'
-    - musi zawierać wszystkie informacje dot. rezerwacji
-    - umożliwia edycję i zapisanie zmian
+- `/tables`
+  - date and time inpput
+  - table of bookings and events
+    - column = 1 table
+    - row = 30 minute
+    - like Google Calendar week view, but instead of days in columns we have tables
+    - after clicking booking or event we go to details page
+- `/tables/booking/:id`
+  - informations about booking
+  - enable to edit and save changes
+- `/tables/booking/new`
+  - enable to create new booking
+- `/tables/events/:id`
+  - informations about events
+  - enable to edit and save changes
+- `/tables/events/new`
+  - enable to create new event
 
-  - 'tables/booking/new'
-    - jw. bez początkowych informacji
+# Waiter panel
 
-  - '/tables/events/:id'
-    - musi zawierać wszystkie informacje dot. rezerwacji
-    - umożliwia edycję i zapisanie zmian
+- `/waiter`
+  - table
+    - rows = tables
+    - columns = infomrations (status, time counted from status change)
+    - last columns = actions for table
+- `/waiter/order/new`
+  - table numer (editable)
+  - menu
+  - product options
+  - order (ordered products with options)
+  - total price
+- `/waiter/order/:id`
 
-  - 'tables/events/new'
-    - jw. bez początkowych informacji
+# Kitchen panel
 
-# Widok kelnera
-
-  - '/waiter'
-    - tabela
-      - wiersze = stoliki
-      - kolumny = info (status stolika, czas od aktywności)
-      - ostatnia kolumna = dostępne akcje dla stolika
-
-  - '/waiter/order/new'
-    - numer stolika (edytowalny)
-    - menu produktów
-    - opcje wybranego produktu
-    - zamówienie (zamówione produkty z opcjami i ceną)
-    - kwota zamówienia
-
-  - '/waiter/order/:id'
-    - jw.
-
-# Widok kuchni
-
-  - '/kitchen'
-    - lista zamowień w kolejności złożenia
-    - lista zawiera
-      - numer stolika lub zamówienia zdalnego,
-      - pełne info dot. zamówionych dań
-    - musi być możliwość oznaczenia zrealizowanego zamówienia
+- `/kitchen`
+  - order list sorted by time
+  - contains:
+    - table number or takeaway order and informations about dishes
+    - button to change status
