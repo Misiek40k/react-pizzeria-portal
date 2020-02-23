@@ -1,14 +1,21 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 import Header from '../Header/Header';
 
-const MainLayout = props => {
+const MainLayout = ({children}) => {
   return (
     <Fragment>
-      <Header />
+      <AppBar>
+        <Toolbar>
+          <Header />
+        </Toolbar>
+      </AppBar>
+      <Toolbar/>
       <main>
-        {props.children}
+        {children}
       </main>
     </Fragment>
   );
