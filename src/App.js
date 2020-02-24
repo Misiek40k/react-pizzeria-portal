@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { StylesProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import { settings } from './data/dataStore';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
 import Dashboard from './components/views/Dashboard/Dashboard';
@@ -25,23 +26,25 @@ const theme = createMuiTheme({
 );
 
 function App() {
+  const url = settings.url;
+
   return (
     <BrowserRouter>
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
           <MainLayout>
             <Switch>
-              <Route exact path={`${process.env.PUBLIC_URL}/`} component={Dashboard} />
-              <Route exact path={`${process.env.PUBLIC_URL}/login`} component={Login} />
-              <Route exact path={`${process.env.PUBLIC_URL}/tables`} component={Tables} />
-              <Route exact path={`${process.env.PUBLIC_URL}/waiter`} component={Waiter} />
-              <Route exact path={`${process.env.PUBLIC_URL}/kitchen`} component={Kitchen} />
-              <Route exact path={`${process.env.PUBLIC_URL}/waiter/order/new`} component={OrderNew} />
-              <Route exact path={`${process.env.PUBLIC_URL}/waiter/order/:id`} component={OrderItem} />
-              <Route exact path={`${process.env.PUBLIC_URL}/tables/booking/new`} component={BookingNew} />
-              <Route exact path={`${process.env.PUBLIC_URL}/tables/booking/:id`} component={BookingItem} />
-              <Route exact path={`${process.env.PUBLIC_URL}/tables/events/new`} component={EventsNew} />
-              <Route exact path={`${process.env.PUBLIC_URL}/tables/events/:id`} component={EventsItem} />
+              <Route exact path={`${url}/`} component={Dashboard} />
+              <Route exact path={`${url}/login`} component={Login} />
+              <Route exact path={`${url}/tables`} component={Tables} />
+              <Route exact path={`${url}/waiter`} component={Waiter} />
+              <Route exact path={`${url}/kitchen`} component={Kitchen} />
+              <Route exact path={`${url}/waiter/order/new`} component={OrderNew} />
+              <Route exact path={`${url}/waiter/order/:id`} component={OrderItem} />
+              <Route exact path={`${url}/tables/booking/new`} component={BookingNew} />
+              <Route exact path={`${url}/tables/booking/:id`} component={BookingItem} />
+              <Route exact path={`${url}/tables/events/new`} component={EventsNew} />
+              <Route exact path={`${url}/tables/events/:id`} component={EventsItem} />
             </Switch>
           </MainLayout>
         </ThemeProvider>
