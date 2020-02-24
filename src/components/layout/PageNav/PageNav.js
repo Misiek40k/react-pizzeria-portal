@@ -1,14 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import {settings} from '../../../data/dataStore';
 
 const PageNav = () => {
+  const url = settings.url;
+
   return (
     <nav>
-      <NavLink exact to={`${process.env.PUBLIC_URL}/`} activeClassName='active'>Home</NavLink>
-      <NavLink to={`${process.env.PUBLIC_URL}/login`} activeClassName='active'>Login</NavLink>
-      <NavLink to={`${process.env.PUBLIC_URL}/tables`} activeClassName='active'>Tables</NavLink>
-      <NavLink to={`${process.env.PUBLIC_URL}/waiter`} activeClassName='active'>Waiter</NavLink>
-      <NavLink to={`${process.env.PUBLIC_URL}/kitchen`} activeClassName='active'>Kitchen</NavLink>
+      <NavLink exact to={`${url}/`} activeClassName='active'>Home</NavLink>
+      <NavLink to={`${url}/login`} activeClassName='active'>Login</NavLink>
+      <NavLink to={`${url}/tables`} activeClassName='active'>Tables</NavLink>
+      <NavLink to={`${url}/waiter`} activeClassName='active'>Waiter</NavLink>
+      <NavLink to={`${url}/kitchen`} activeClassName='active'>Kitchen</NavLink>
     </nav>
   );
 };
