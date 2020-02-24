@@ -1,3 +1,3 @@
 export const settings = {
-  url: 'process.env.PUBLIC_URL',
+  url: process.env.PUBLIC_URL,
 };
