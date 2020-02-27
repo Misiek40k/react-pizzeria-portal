@@ -1,24 +1,104 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { settings } from '../../../data/dataStore';
+import { Link } from 'react-router-dom';
+
+import Table from '@material-ui/core/Table';
+import Container from '@material-ui/core/Container';
+import TableBody from '@material-ui/core/TableBody';
+import Toolbar from '@material-ui/core/Toolbar';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 import styles from './Waiter.module.scss';
 
-const Waiter = ({ id }) => {
+const demoContent = [
+  { id: '1', status: 'free', order: null },
+  { id: '2', status: 'thinking', order: null },
+  { id: '3', status: 'ordered', order: 123 },
+  { id: '4', status: 'prepared', order: 234 },
+  { id: '5', status: 'delivered', order: 345 },
+  { id: '6', status: 'paid', order: 456 },
+];
+
+const renderActions = status => {
+  switch (status) {
+    case 'free':
+      return (
+        <>
+          <Button>thinking</Button>
+          <Button>new order</Button>
+        </>
+      );
+    case 'thinking':
+      return (
+        <Button>new order</Button>
+      );
+    case 'ordered':
+      return (
+        <Button>prepared</Button>
+      );
+    case 'prepared':
+      return (
+        <Button>delivered</Button>
+      );
+    case 'delivered':
+      return (
+        <Button>paid</Button>
+      );
+    case 'paid':
+      return (
+        <Button>free</Button>
+      );
+    default:
+      return null;
+  }
+};
+
+const Waiter = () => {
   const url = settings.url;
 
   return (
-    <div className={styles.component}>
-      <h2>Waiter view</h2>
-      <Link to={`${url}/waiter/order/new`}>New order</Link>
-      <Link to={`${url}/waiter/order/${id}`}>Order ID</Link>
-    </div>
+    <Container maxWidth='lg'>
+      <Toolbar />
+      <Paper className={styles.component}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Table</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell>Order</TableCell>
+              <TableCell>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {demoContent.map(row => (
+              <TableRow key={row.id}>
+                <TableCell component="th" scope="row">
+                  {row.id}
+                </TableCell>
+                <TableCell>
+                  {row.status}
+                </TableCell>
+                <TableCell>
+                  {row.order && (
+                    <Button component={Link} to={`${url}/waiter/order/${row.order}`}>
+                      {row.order}
+                    </Button>
+                  )}
+                </TableCell>
+                <TableCell>
+                  {renderActions(row.status)}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
+    </Container>
   );
-};
-
-Waiter.propTypes = {
-  id: PropTypes.string,
 };
 
 export default Waiter;
