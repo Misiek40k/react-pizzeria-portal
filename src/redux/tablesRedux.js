@@ -1,41 +1,99 @@
-import {combineReducers, createStore, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import Axios from 'axios';
+import { api } from '../data/dataStore';
 
-import tablesReducer from './tablesRedux';
+/* selectors */
+export const getAll = ({ tables }) => tables.data;
+export const getLoadingState = ({ tables }) => tables.loading;
 
-// define initial state and shallow-merge initial data
-const initialState = {
-  tables: {
-    data: {},
-    loading: {
-      active: false,
-      error: false,
-    },
-  },
+/* action name creator */
+const reducerName = 'tables';
+const createActionName = name => `app/${reducerName}/${name}`;
+
+/* action types */
+const FETCH_START = createActionName('FETCH_START');
+const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
+const FETCH_ERROR = createActionName('FETCH_ERROR');
+const SET_NEW_STATUS = createActionName('SET_NEW_STATUS');
+
+/* action creators */
+export const fetchStarted = payload => ({ payload, type: FETCH_START });
+export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
+export const fetchError = payload => ({ payload, type: FETCH_ERROR });
+export const setNewStatus = payload => ({ payload, type: SET_NEW_STATUS });
+
+/* thunk creators */
+export const fetchFromAPI = () => {
+  return (dispatch, getState) => {
+    dispatch(fetchStarted());
+
+    Axios
+      .get(`${api.url}/${api.tables}`)
+      .then(res => {
+        dispatch(fetchSuccess(res.data));
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
+  };
 };
 
-// define reducers
-const reducers = {
-  tables: tablesReducer,
+export const fetchUpdate = (id, status) => {
+  return (dispatch, getState) => {
+    dispatch(fetchStarted());
+
+    Axios
+      .get(`${api.url}/${api.tables}`)
+      .then(() => {
+        dispatch(setNewStatus(id, status));
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
+  };
 };
 
-// add blank reducers for initial state properties without reducers
-Object.keys(initialState).forEach(item => {
-  if (typeof reducers[item] == 'undefined') {
-    reducers[item] = (statePart = null) => statePart;
+/* reducer */
+export default function reducer(statePart = [], action = {}) {
+  switch (action.type) {
+    case FETCH_START: {
+      return {
+        ...statePart,
+        loading: {
+          active: true,
+          error: false,
+        },
+      };
+    }
+    case FETCH_SUCCESS: {
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: false,
+        },
+        data: action.payload,
+      };
+    }
+    case FETCH_ERROR: {
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: action.payload,
+        },
+      };
+    }
+    case SET_NEW_STATUS: {
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: false,
+        },
+        data: statePart.data.map(table => table.id === action.payload.id ? { ...table, status: action.payload.status } : table),
+      };
+    }
+    default:
+      return statePart;
   }
-});
-
-const combinedReducers = combineReducers(reducers);
-
-// create store
-const store = createStore(
-  combinedReducers,
-  initialState,
-  composeWithDevTools(
-    applyMiddleware(thunk)
-  )
-);
-
-export default store;
+}
